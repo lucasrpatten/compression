@@ -1,2 +1,2 @@
 # compression
-my compression stuff
+Python Compression Algorithm
