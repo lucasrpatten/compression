@@ -1,5 +1,5 @@
 import os
-from compile import *
+compile import *
 from word_list import word_list as word_list
 import collections
 from operator import itemgetter
@@ -26,7 +26,7 @@ def phase1(file_string, data_file="data.txt"):
 def phase2(string):
     c = collections.Counter(string[i:] for i in range(len(string)))
     print(f"{c}")
-    
+
     # lengths = []
     # for d in range(lower_value, upper_value + 1):
     #     list = []

@@ -2,8 +2,6 @@ from compile import *
 import os#, nltk
 import phases
 
-
-
 def main():
     file_string = read_file('enwik7')
 # Phase 1
