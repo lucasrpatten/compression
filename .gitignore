@@ -1,3 +1,6 @@
 compressed
 data.txt
 /.git
+._.new_main.py
+._.compile.py
+._.gitignore
