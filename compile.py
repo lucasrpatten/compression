@@ -17,7 +17,7 @@ def huffman(string):
 def find_poly(x, y):
     return lagrange(x, y)
 def write_lzma(to_compress):
-    file = lzma.LZMAFile('compressed.txt', mode='w', preset=9)
+    file = lzma.LZMAFile('compressed', mode='w', preset=9)
     file.write(bytes(str(to_compress).encode('utf-8')))
     file.close()
     return None
