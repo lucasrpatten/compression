@@ -13,7 +13,7 @@ def phase1(file_string, data_file="data.txt"):
         occurences = file_string.count(current_word)
         if occurences > len(current_word)+6:
             os.system('cls' if os.name=='nt' else 'clear')
-            print("phase 1:\n" + str(round(i/220000*100)) + '% complete')
+            print(f"phase 1:\n{i/220000*100:.2f} % complete")
             key = random_string()
             key = check_key(key, file_string)
             shorter += f"{key}:{current_word}\n"
@@ -24,11 +24,11 @@ def phase1(file_string, data_file="data.txt"):
     data_file.close()
  
 def phase2(string, lower_range=1, upper_range=10):
-    print("phase 2: 0% complete")
+    print("phase 2: Starting")
     values = {}
     for n in range(lower_range, upper_range):
         os.system('cls' if os.name=='nt' else 'clear')
-        print(f'{n}\n–\n{upper_range}')
+        print(f'{n} - Current iteration\n– - Phase 2\n{upper_range} - Total iterations')
         string_list = string[::n]
         inarow = 0
         current_char = ""
@@ -38,8 +38,12 @@ def phase2(string, lower_range=1, upper_range=10):
                 inarow += 1
             elif inarow >= len(str(i))+len(str(i))+len(str(n))+15:
                 inarow += 1
-                current_values.append(f"{i-inarow} - {i} {inarow} in a row, {string_list[i-inarow:i]}")
-                current_char = str(string_list[i])
+                if string_list[i-1] != '.':
+                    current_values.append(f",n.{i-inarow}.inarow.{string_list[i-1]}")
+                    current_char = str(string_list[i])
+                else:
+                    current_values.append(f",n.{i-inarow}.inarow.period,")
+                    current_char = str(string_list[i])
                 inarow = 0
             else:
                 current_char = str(string_list[i])
@@ -49,6 +53,7 @@ def phase2(string, lower_range=1, upper_range=10):
             values[n] = current_values
         except IndexError:
             pass
+
     return values
 
 
