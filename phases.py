@@ -1,9 +1,9 @@
 import os
-compile import *
+from compile import *
 from word_list import word_list as word_list
 import collections
 from operator import itemgetter
-
+import regex as re
 
 def phase1(file_string, data_file="data.txt"):
     data_file = open(data_file, "w")
@@ -22,10 +22,38 @@ def phase1(file_string, data_file="data.txt"):
     os.system('cls' if os.name=='nt' else 'clear')
     print("phase 1:\n 100% complete")
     data_file.close()
+ 
+def phase2(string, lower_range=1, upper_range=10):
+    print("phase 2: 0% complete")
+    values = {}
+    for n in range(lower_range, upper_range):
+        os.system('cls' if os.name=='nt' else 'clear')
+        print(f'{n}\n–\n{upper_range}')
+        string_list = string[::n]
+        inarow = 0
+        current_char = ""
+        current_values = []
+        for i in range(len(string_list)): 
+            if string_list[i] == current_char:
+                inarow += 1
+            elif inarow >= len(str(i))+len(str(i))+len(str(n))+15:
+                inarow += 1
+                current_values.append(f"{i-inarow} - {i} {inarow} in a row, {string_list[i-inarow:i]}")
+                current_char = str(string_list[i])
+                inarow = 0
+            else:
+                current_char = str(string_list[i])
+                inarow = 0
+        try:
+            current_values[0]
+            values[n] = current_values
+        except IndexError:
+            pass
+    return values
 
-def phase2(string):
-    c = collections.Counter(string[i:] for i in range(len(string)))
-    print(f"{c}")
+
+    #c = collections.Counter(string[i:] for i in range(len(string)))
+    #print(f"{c}")
 
     # lengths = []
     # for d in range(lower_value, upper_value + 1):
