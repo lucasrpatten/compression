@@ -2,7 +2,24 @@ from dahuffman import HuffmanCodec
 from scipy.interpolate import lagrange
 import random, lzma
 import string as st
-
+import regex as re
+def generate_pList(object):
+    object = object.split('.')
+    if object[-1] == 'period':
+        object[-1] = '.'
+    else:
+        pass
+    return object
+class patternNotation: # format - ,what_split.where.how_many.what., - ex ,2.1435.133. ., representing every other pattern, at index 1435, 133 in a row of space
+    def __init__(self, patternObject):
+        self.pList = generate_pList(patternObject)
+        self.patternObjectbject = patternObject
+        self.pObj = self.patternObject # short for patternObject
+        self.split_value = self.pList[0]
+        self.split_location = selfPlist[1]
+        self.split_inarow = selfPlist[2]
+        self.split_item = selfPlist[3]
+patNot = patternNotation#short for pattern notation
 
 def read_file(file_name = 'enwik9'):
     file = open(file_name, 'r')
@@ -17,7 +34,7 @@ def huffman(string):
 def find_poly(x, y):
     return lagrange(x, y)
 def write_lzma(to_compress):
-    file = lzma.LZMAFile('compressed.txt', mode='w', preset=9)
+    file = lzma.LZMAFile('compressed', mode='w', preset=9)
     file.write(bytes(str(to_compress).encode('utf-8')))
     file.close()
     return None
