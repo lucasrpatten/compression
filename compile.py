@@ -12,17 +12,18 @@ def generate_pList(object):
     return object
 class patternNotation: # format - ,what_split.where.how_many.what., - ex 2.1435.133. . representing every other pattern, at index 1435, 133 in a row of space
     #I will probably make a github exclusively for pattern detection and pattern data types later - just so ya'll know
+
+#This needs lots of optimization
     def __init__(self, patternObject):
         self.pList = generate_pList(patternObject)
         self.patternObject = patternObject
-        self.pObj = self.patternObject # short for patternObject
-        self.value_ = self.pList[0]
-        self.location = selfPlist[1]
-        self.inarow = selfPlist[2]
-        self.item = selfPlist[3]
+        self.pObj = self.patternObject
+        self.every_nth = generate_pList(patternObject)[0]
+        self.location = generate_pList(patternObject)[1]
+        self.inarow = generate_pList(patternObject)[2]
+        self.item = generate_pList(patternObject)[3]
 
-class patNot(patternNotation):#short for pattern notation
-    pass
+patNot = patternNotation#short for pattern notation
 
 
 class patComp:
@@ -31,9 +32,9 @@ class patComp:
         self.table = patternTable
     def sort(self):
         sortDict = {}
-        for i in (0, self.length):
-            print(self.length)
-            sortDict[int(patternNotation.value_(self.table[i]))] = self.table[i]
+        for i in (0, int(self.length)):
+            current_item = patternNotation(self.table[i])
+            sortDict[current_item.every_nth] = self.table[i]
         sorted = dict(sorted(sortDict.items()))
         return list(sorted)
 

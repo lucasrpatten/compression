@@ -14,7 +14,7 @@ def phase1(file_string, data_file="data.txt"):
         occurences = file_string.count(current_word)
         if occurences > len(current_word)+6:
             os.system('cls' if os.name=='nt' else 'clear')
-            print(f"phase 1:\n{i/220000*100:.2f} % complete\telapsed time: {time.time() - start}")
+            print(f"phase 1:\n{i/220000*100:.2f} % complete\telapsed time: {time.time() - start:.2f}")
             key = random_string()
             key = check_key(key, file_string)
             shorter += f"{key}:{current_word}\n"
@@ -55,20 +55,22 @@ def phase2(string, lower_range=1, upper_range=10):
             pattern_list = []
             for e in range(len(current_values)):
                 pattern_list.append(current_values[e])
-            pattern_list = patComp(pattern_list).sort()
+            pat_list_1 = patComp(pattern_list)
+            pattern_list = pat_list_1.sort()
             new_value = ""
             last_upper = 0
             for q in range(len(pattern_list)):
                 print('q', string(pattern_list[q]))
                 patlist_q = pattern_list[q]
-                sliced = [string[p:p+int(patNot.value_(patlist_q))-1] for p in range(int(patNot.location(patlist_q)), int(patNot.inarow(patlist_q)) * int(patNot.value_(patlist_q)), int(patNot.value_(patlist_q)))]
-                if int(patNot.location(patlist_q)) != last_upper:
-                    new_value = new_value + string[last_upper:int(patNot.location(patlist_q))]
+                pat_obj = patNot(patlist_q)
+                sliced = [string[p:p+int(pat_obj.every_nth())-1] for p in range(int(pat_obj.location()), int(pat_obj.inarow()) * int(pat_obj.every_nth()), int(pat_obj.every_nth()))]
+                if int(pat_obj.location()) != last_upper:
+                    new_value = new_value + string[last_upper:int(pat_obj.locaiton())]
                     new_value = new_value + stripped_string
-                    last_upper = int(patNot.location(pattern_list[q]) + patNot.inarow(patlist_q))
+                    last_upper = int(pat_obj.location() + pat_obj.inarow())
                 else:
                     new_value = new_value + stripped_string
-                    last_upper = int(patNot.location(patlist_q)) + int(patNot.inarow(patlist_q)) * int(patNot.value_(patlist_q))
+                    last_upper = int(pat_obj.location()) + int(pat_obj.inarow()) * int(pat_obj.every_nth())
         except IndexError:
             pass
     return values
