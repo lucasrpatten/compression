@@ -16,13 +16,14 @@ class patternNotation: # format - ,what_split.where.how_many.what., - ex 2.1435.
         self.pList = generate_pList(patternObject)
         self.patternObject = patternObject
         self.pObj = self.patternObject # short for patternObject
-        self.value = self.pList[0]
+        self.value_ = self.pList[0]
         self.location = selfPlist[1]
         self.inarow = selfPlist[2]
         self.item = selfPlist[3]
 
 class patNot(patternNotation):#short for pattern notation
     pass
+
 
 class patComp:
     def __init__(self, patternTable):
@@ -31,9 +32,10 @@ class patComp:
     def sort(self):
         sortDict = {}
         for i in (0, self.length):
-            sortDict[int(patternNotation.value(self.table[i]))] = self.table[i]
+            print(self.length)
+            sortDict[int(patternNotation.value_(self.table[i]))] = self.table[i]
         sorted = dict(sorted(sortDict.items()))
-        return list(sorted.values())
+        return list(sorted)
 
 class patternCompare(patComp):
     pass
@@ -66,6 +68,9 @@ def check_key(string, data, string_length=5):
     while in_data(string, data) == True:
         string = random_string(string_length)
     return string
+
+def split_string(string, lower, upper, n):
+    return [string[i:i+n] for i in range(lower, upper, n)]
 
 def into_dict(file_string):
     file_table = split_file(file_string)

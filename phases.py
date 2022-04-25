@@ -52,27 +52,28 @@ def phase2(string, lower_range=1, upper_range=10):
         try:
             current_values[0]
             values[n] = current_values
+            pattern_list = []
+            for e in range(len(current_values)):
+                pattern_list.append(current_values[e])
+            pattern_list = patComp(pattern_list).sort()
+            new_value = ""
+            last_upper = 0
+            for q in range(len(pattern_list)):
+                print('q', string(pattern_list[q]))
+                patlist_q = pattern_list[q]
+                sliced = [string[p:p+int(patNot.value_(patlist_q))-1] for p in range(int(patNot.location(patlist_q)), int(patNot.inarow(patlist_q)) * int(patNot.value_(patlist_q)), int(patNot.value_(patlist_q)))]
+                if int(patNot.location(patlist_q)) != last_upper:
+                    new_value = new_value + string[last_upper:int(patNot.location(patlist_q))]
+                    new_value = new_value + stripped_string
+                    last_upper = int(patNot.location(pattern_list[q]) + patNot.inarow(patlist_q))
+                else:
+                    new_value = new_value + stripped_string
+                    last_upper = int(patNot.location(patlist_q)) + int(patNot.inarow(patlist_q)) * int(patNot.value_(patlist_q))
         except IndexError:
             pass
-        pattern_list = []
-        for e in range(len(current_values)):
-            pattern_list.append(current_values[e])
-        pattern_list = patComp.sort(pattern_list)
-        new_value = ""
-        last_upper = 0
-        for q in range(len(pattern_list)):
-            stripped_string = str(string[int(patNot.location(pattern_list[q])):(int(patNot.location(pattern_list[q]))+int(patNot.inarow(pattern_list[q])))].strip([::9]))
-            if int(patNot.location(pattern_list[q])) != last_upper:
-                new_value = new_value + string[last_upper:int(patNot.location(pattern_list[q])]
-                new_value = new_value + stripped_string
-                last_upper = int(patNot.location(pattern_list[q]) + patNot.inarow(pattern_list[q]))
-            else:
-                new_value = new_value + stripped_string
-                last_upper = int(patNot.location(pattern_list[q]) + patNot.inarow(pattern_list[q]))
-
+    return values
             #active_value = current_values[e]
             #value, location, amount, item = patNot.value(active_value), patNot.location(active_value), patNot.inarow(active_value), patNot.item(active_value)
-    return values, string
 
 
     #c = collections.Counter(string[i:] for i in range(len(string)))

@@ -3,11 +3,11 @@ import os#, nltk
 import phases
 
 def main():
-    file_string = read_file('enwik7')
+    file_string = read_file('xaa')
 # Phase 1
     #phases.phase1(file_string)
 # Phase 2
-    values, string= phases.phase2(file_string)
+    values= phases.phase2(file_string)
     print(values)
     data_file = open('data.txt', 'r');dataset = data_file.read();data_file.close()
     write_lzma(dataset)
