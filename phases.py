@@ -4,8 +4,9 @@ from word_list import word_list as word_list
 import collections
 from operator import itemgetter
 import regex as re
-
+import time
 def phase1(file_string, data_file="data.txt"):
+    start = time.time()
     data_file = open(data_file, "w")
     shorter = ""
     for i in range(len(word_list)):
@@ -13,7 +14,7 @@ def phase1(file_string, data_file="data.txt"):
         occurences = file_string.count(current_word)
         if occurences > len(current_word)+6:
             os.system('cls' if os.name=='nt' else 'clear')
-            print(f"phase 1:\n{i/220000*100:.2f} % complete")
+            print(f"phase 1:\n{i/220000*100:.2f} % complete\telapsed time: {time.time() - start}")
             key = random_string()
             key = check_key(key, file_string)
             shorter += f"{key}:{current_word}\n"
@@ -39,10 +40,10 @@ def phase2(string, lower_range=1, upper_range=10):
             elif inarow >= len(str(i))+len(str(i))+len(str(n))+15:
                 inarow += 1
                 if string_list[i-1] != '.':
-                    current_values.append(f",n.{i-inarow}.inarow.{string_list[i-1]}")
+                    current_values.append(f"{n}.{i-inarow}.{inarow}.{string_list[i]}")
                     current_char = str(string_list[i])
                 else:
-                    current_values.append(f",n.{i-inarow}.inarow.period,")
+                    current_values.append(f"{n}.{i-inarow}.{inarow}.period")
                     current_char = str(string_list[i])
                 inarow = 0
             else:
@@ -53,8 +54,25 @@ def phase2(string, lower_range=1, upper_range=10):
             values[n] = current_values
         except IndexError:
             pass
+        pattern_list = []
+        for e in range(len(current_values)):
+            pattern_list.append(current_values[e])
+        pattern_list = patComp.sort(pattern_list)
+        new_value = ""
+        last_upper = 0
+        for q in range(len(pattern_list)):
+            stripped_string = str(string[int(patNot.location(pattern_list[q])):(int(patNot.location(pattern_list[q]))+int(patNot.inarow(pattern_list[q])))].strip([::9]))
+            if int(patNot.location(pattern_list[q])) != last_upper:
+                new_value = new_value + string[last_upper:int(patNot.location(pattern_list[q])]
+                new_value = new_value + stripped_string
+                last_upper = int(patNot.location(pattern_list[q]) + patNot.inarow(pattern_list[q]))
+            else:
+                new_value = new_value + stripped_string
+                last_upper = int(patNot.location(pattern_list[q]) + patNot.inarow(pattern_list[q]))
 
-    return values
+            #active_value = current_values[e]
+            #value, location, amount, item = patNot.value(active_value), patNot.location(active_value), patNot.inarow(active_value), patNot.item(active_value)
+    return values, string
 
 
     #c = collections.Counter(string[i:] for i in range(len(string)))
@@ -69,4 +87,4 @@ def phase2(string, lower_range=1, upper_range=10):
     #         if list.count(b) < 4:
     #             list.remove(b)
     #     lengths.append(list)
-    # return lengths
+#     # return lengths

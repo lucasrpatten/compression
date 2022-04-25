@@ -10,16 +10,33 @@ def generate_pList(object):
     else:
         pass
     return object
-class patternNotation: # format - ,what_split.where.how_many.what., - ex ,2.1435.133. ., representing every other pattern, at index 1435, 133 in a row of space
+class patternNotation: # format - ,what_split.where.how_many.what., - ex 2.1435.133. . representing every other pattern, at index 1435, 133 in a row of space
+    #I will probably make a github exclusively for pattern detection and pattern data types later - just so ya'll know
     def __init__(self, patternObject):
         self.pList = generate_pList(patternObject)
-        self.patternObjectbject = patternObject
+        self.patternObject = patternObject
         self.pObj = self.patternObject # short for patternObject
-        self.split_value = self.pList[0]
-        self.split_location = selfPlist[1]
-        self.split_inarow = selfPlist[2]
-        self.split_item = selfPlist[3]
-patNot = patternNotation#short for pattern notation
+        self.value = self.pList[0]
+        self.location = selfPlist[1]
+        self.inarow = selfPlist[2]
+        self.item = selfPlist[3]
+
+class patNot(patternNotation):#short for pattern notation
+    pass
+
+class patComp:
+    def __init__(self, patternTable):
+        self.length = len(patternTable)
+        self.table = patternTable
+    def sort(self):
+        sortDict = {}
+        for i in (0, self.length):
+            sortDict[int(patternNotation.value(self.table[i]))] = self.table[i]
+        sorted = dict(sorted(sortDict.items()))
+        return list(sorted.values())
+
+class patternCompare(patComp):
+    pass
 
 def read_file(file_name = 'enwik9'):
     file = open(file_name, 'r')

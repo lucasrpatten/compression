@@ -5,7 +5,7 @@ def create_dict(file_name):
     word_list = nltk.corpus.words.words()
     new = []
     for i in word_list:
-        if len(i) > 5:
+        if len(i) > 11:
             new.append(i)
     dictionary.write(f"word_list = {new}")
     dictionary.close
