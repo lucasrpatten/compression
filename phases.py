@@ -24,8 +24,9 @@ def phase1(file_string, data_file="data.txt"):
     print("phase 1:\n 100% complete")
     data_file.close()
  
-def phase2(string, lower_range=1, upper_range=10):
+def phase2(string, lower_range=1, upper_range=10, data_file="data.txt"):
     print("phase 2: Starting")
+    data_file = open(data_file, 'a')
     values = {}
     for n in range(lower_range, upper_range):
         os.system('cls' if os.name=='nt' else 'clear')
@@ -52,28 +53,39 @@ def phase2(string, lower_range=1, upper_range=10):
         try:
             current_values[0]
             values[n] = current_values
-            pattern_list = []
-            for e in range(len(current_values)):
-                pattern_list.append(current_values[e])
-            pat_list_1 = patComp(pattern_list)
+        except IndexError:
+            print('epic_fail')
+        pattern_list = []
+        new_value =""
+        for e in range(len(current_values)):
+            pattern_list.append(current_values[e])
+        pat_list_1 = patComp(pattern_list)
+        try:
             pattern_list = pat_list_1.sort()
-            new_value = ""
-            last_upper = 0
-            for q in range(len(pattern_list)):
-                print('q', string(pattern_list[q]))
-                patlist_q = pattern_list[q]
-                pat_obj = patNot(patlist_q)
-                sliced = [string[p:p+int(pat_obj.every_nth())-1] for p in range(int(pat_obj.location()), int(pat_obj.inarow()) * int(pat_obj.every_nth()), int(pat_obj.every_nth()))]
-                if int(pat_obj.location()) != last_upper:
-                    new_value = new_value + string[last_upper:int(pat_obj.locaiton())]
-                    new_value = new_value + stripped_string
-                    last_upper = int(pat_obj.location() + pat_obj.inarow())
-                else:
-                    new_value = new_value + stripped_string
-                    last_upper = int(pat_obj.location()) + int(pat_obj.inarow()) * int(pat_obj.every_nth())
         except IndexError:
             pass
-    return values
+        print(pattern_list)
+        last_upper = 0
+        not_string = string
+        for q in range(len(pattern_list)):
+            pattern_list = list(pattern_list)
+            print('q', str(pattern_list[q]))
+            patlist_q = pattern_list[q]
+            pat_obj = patNot(patlist_q)
+            sliced = [str(not_string)[p:p+int(pat_obj.every_nth())-1] for p in range(int(pat_obj.location()), int(pat_obj.inarow()) * int(pat_obj.every_nth()), int(pat_obj.every_nth()))]
+            print(pat_obj.location)
+            print(last_upper)
+            if int(pat_obj.location()) != last_upper:
+                new_value = new_value + string[last_upper:int(pat_obj.location())]
+                new_value = new_value + stripped_string
+                last_upper = int(pat_obj.location() + pat_obj.inarow())
+            else:
+                new_value = new_value + stripped_string
+                last_upper = int(pat_obj.location()) + int(pat_obj.inarow()) * int(pat_obj.every_nth())
+    print(new_value)
+    data_file.write(f"{values}\n{new_value}")
+    data_file.close()
+    return values, new_value
             #active_value = current_values[e]
             #value, location, amount, item = patNot.value(active_value), patNot.location(active_value), patNot.inarow(active_value), patNot.item(active_value)
 
