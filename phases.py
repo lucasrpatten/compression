@@ -24,9 +24,9 @@ def phase1(file_string, data_file="data.txt"):
     print("phase 1:\n 100% complete")
     data_file.close()
  
-def phase2(string, lower_range=1, upper_range=10, data_file="data.txt"):
+def phase2(string, lower_range=1, upper_range=10, data_file="data.txt", iteration=0):
     print("phase 2: Starting")
-    data_file = open(data_file, 'w')
+    data_file = open(data_file, 'a')
     values = {}
     new_value = ""
     for n in range(lower_range, upper_range):
@@ -81,9 +81,9 @@ def phase2(string, lower_range=1, upper_range=10, data_file="data.txt"):
             else:
                 new_value = new_value + stripped_string
                 last_upper = int(pat_obj.location) + int(pat_obj.inarow) * int(pat_obj.every_nth)
-    data_file.write(f"{values}\n{new_value}")
+    data_file.write(f"{iteration} : {values}\n\n")
     data_file.close()
-    return values, new_value
+    return new_value
             #active_value = current_values[e]
             #value, location, amount, item = patNot.value(active_value), patNot.location(active_value), patNot.inarow(active_value), patNot.item(active_value)
 
@@ -100,4 +100,4 @@ def phase2(string, lower_range=1, upper_range=10, data_file="data.txt"):
     #         if list.count(b) < 4:
     #             list.remove(b)
     #     lengths.append(list)
-#     # return lengths
+    # return lengths

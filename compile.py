@@ -91,3 +91,17 @@ def into_dict(file_string):
     return items
 def all_string(length=3):
     return list(map(''.join, product(st.printable.split(""), repeat=length)))
+
+def splitFile(file, split_location):
+    outputBase = f'{file}'
+
+    input = open(file, 'r').read().split('\n')
+    at = 1
+    for lines in range(0, len(input), split_location):
+        outputData = input[lines:lines+split_location]
+
+        output = open(outputBase + str(at) + '.txt', 'w')
+        output.write('\n'.join(outputData))
+        output.close()
+
+        at+=1
