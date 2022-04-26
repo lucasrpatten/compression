@@ -26,8 +26,9 @@ def phase1(file_string, data_file="data.txt"):
  
 def phase2(string, lower_range=1, upper_range=10, data_file="data.txt"):
     print("phase 2: Starting")
-    data_file = open(data_file, 'a')
+    data_file = open(data_file, 'w')
     values = {}
+    new_value = ""
     for n in range(lower_range, upper_range):
         os.system('cls' if os.name=='nt' else 'clear')
         print(f'{n} - Current iteration\n– - Phase 2\n{upper_range} - Total iterations')
@@ -54,9 +55,8 @@ def phase2(string, lower_range=1, upper_range=10, data_file="data.txt"):
             current_values[0]
             values[n] = current_values
         except IndexError:
-            print('epic_fail')
+            pass
         pattern_list = []
-        new_value =""
         for e in range(len(current_values)):
             pattern_list.append(current_values[e])
         pat_list_1 = patComp(pattern_list)
@@ -64,25 +64,23 @@ def phase2(string, lower_range=1, upper_range=10, data_file="data.txt"):
             pattern_list = pat_list_1.sort()
         except IndexError:
             pass
-        print(pattern_list)
         last_upper = 0
-        not_string = string
         for q in range(len(pattern_list)):
             pattern_list = list(pattern_list)
-            print('q', str(pattern_list[q]))
             patlist_q = pattern_list[q]
             pat_obj = patNot(patlist_q)
-            sliced = [str(not_string)[p:p+int(pat_obj.every_nth())-1] for p in range(int(pat_obj.location()), int(pat_obj.inarow()) * int(pat_obj.every_nth()), int(pat_obj.every_nth()))]
-            print(pat_obj.location)
-            print(last_upper)
-            if int(pat_obj.location()) != last_upper:
-                new_value = new_value + string[last_upper:int(pat_obj.location())]
+            sliced = [string[p:p+int(pat_obj.every_nth)-1] for p in range(int(pat_obj.location), int(pat_obj.inarow) * int(pat_obj.every_nth), int(pat_obj.every_nth))]
+
+            stripped_string = "" 
+            for y in range(len(sliced)):
+                stripped_string = stripped_string + str(sliced[y])
+            if int(pat_obj.location) != last_upper:
+                new_value = new_value + string[last_upper:int(pat_obj.location)]
                 new_value = new_value + stripped_string
-                last_upper = int(pat_obj.location() + pat_obj.inarow())
+                last_upper = int(pat_obj.location + pat_obj.inarow)
             else:
                 new_value = new_value + stripped_string
-                last_upper = int(pat_obj.location()) + int(pat_obj.inarow()) * int(pat_obj.every_nth())
-    print(new_value)
+                last_upper = int(pat_obj.location) + int(pat_obj.inarow) * int(pat_obj.every_nth)
     data_file.write(f"{values}\n{new_value}")
     data_file.close()
     return values, new_value
