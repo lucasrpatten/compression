@@ -1,0 +1,8 @@
+click==8.1.2
+dahuffman==0.4.1
+joblib==1.1.0
+nltk==3.7
+numpy==1.22.3
+regex==2022.3.15
+scipy==1.8.0
+tqdm==4.64.0
