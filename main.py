@@ -1,5 +1,5 @@
 from compile import *
-import os#, nltk
+import os
 import phases
 
 def main():
@@ -7,9 +7,11 @@ def main():
 # Phase 1
     phases.phase1(file_string)
 # Phase 2
-    for i in range(1, 100): #0 - 4 (5 iterations)
-        file_string = phases.phase2(file_string, 1, 10000, 'data.txt', i)
-    with open('data.txt', 'a') as ff: ff.write(file_string); ff.close()
+    for i in range(0, 10): #0 - 4 (5 iterations)
+        pass 
+
+        #file_string = phases.phase2(file_string, 1, 10000, 'data.txt', i)
+    # with open('data.txt', 'a') as ff: ff.write(file_string); ff.close()
     data_file = open('data.txt', 'r');dataset = data_file.read();data_file.close()
     write_lzma(dataset)
     original_size = os.popen('ls -l enwik8').read()

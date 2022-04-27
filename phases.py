@@ -19,7 +19,7 @@ def phase1(file_string, data_file="data.txt"):
             key = check_key(key, file_string)
             shorter += f"{key}:{current_word}\n"
             file_string = file_string.replace(current_word, key)
-    data_file.write(shorter + file_string)
+    data_file.write(f'{shorter}\n#p1\n{file_string}')
     os.system('cls' if os.name=='nt' else 'clear')
     print("phase 1:\n 100% complete")
     data_file.close()
