@@ -14,12 +14,11 @@ def phase1(file_string, data_file="data.txt"):
         occurences = file_string.count(current_word)
         if occurences > len(current_word)+6:
             os.system('cls' if os.name=='nt' else 'clear')
-            print(f"phase 1:\n{i/220000*100:.2f} % complete\telapsed time: {time.time() - start:.2f}")
-            key = random_string()
+            print(f"phase 1 part 1/2:\n{i/220000*100:.2f} % complete\telapsed time: {time.time() - start:.2f}")
+            key = random_string(4)
             key = check_key(key, file_string)
             shorter += f"{key}:{current_word}\n"
-            file_string = file_string.replace(current_word, key)
-    data_file.write(f'{shorter}\n#p1\n{file_string}')
+            file_string = file_string.replace(current_word, key)    data_file.write(f'{shorter}\n#p1\n{file_string}')
     os.system('cls' if os.name=='nt' else 'clear')
     print("phase 1:\n 100% complete")
     data_file.close()
@@ -84,20 +83,16 @@ def phase2(string, lower_range=1, upper_range=10, data_file="data.txt", iteratio
     data_file.write(f"{iteration} : {values}\n\n")
     data_file.close()
     return new_value
-            #active_value = current_values[e]
-            #value, location, amount, item = patNot.value(active_value), patNot.location(active_value), patNot.inarow(active_value), patNot.item(active_value)
 
 
-    #c = collections.Counter(string[i:] for i in range(len(string)))
-    #print(f"{c}")
-
-    # lengths = []
-    # for d in range(lower_value, upper_value + 1):
-    #     list = []
-    #     K = d
-    #     list.append([string[i: j] for i in range(len(string)) for j in range(i + 1, len(string) + 1) if len(string[i:j]) == K])
-    #     for b in list:
-    #         if list.count(b) < 4:
-    #             list.remove(b)
-    #     lengths.append(list)
-    # return lengths
+#def phase4(file_string, data_file = "data.txt", n=6):
+#    with open(data_file, 'a') as file:
+#        all_hex = file_string.encode('utf-8').hex()
+#        all_dec = str(int(all_hex, 16))
+#        split_dec = [all_dec[i:i+n] for i in range(0, len(all_dec), n]
+#        alias_values = ""
+#        length = len(split_dec)
+#        if length 
+#        for i in range(0, length):
+#            current_dec = split_dec[i]
+#        return 

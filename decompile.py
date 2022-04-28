@@ -5,9 +5,7 @@ def decomp_phase1(file):
         word_dict = file[0].split('\n')
         uncompressed_string = file[1]
         for i in range(len(word_dict)-1):
-            print(i)
             pair = word_dict[i].split(':')
-            print(pair)
             uncompressed_string = uncompressed_string.replace(pair[0], pair[1])
         f.close()
         return uncompressed_string
