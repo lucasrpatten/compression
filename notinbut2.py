@@ -1,0 +1,1 @@
+listoflength2 = ['gZ', 'jB', 'jC', 'jD', 'jF', 'jJ', 'jM', 'jN', 'jQ', 'jS', 'jT', 'jU', 'jX', 'jZ', 'lZ', 'mZ', 'pY', 'qB', 'qE', 'qG', 'qH', 'qK', 'qO', 'qX', 'qZ', 'uO', 'uV', 'uX', 'vF', 'vV', 'vY', 'vZ', 'xQ', 'zN', 'zW', '1V', 'Fk', 'Jq', 'Jx', 'Qk', 'Qq', 'QY', 'Tq', 'Vq', 'Yj', 'Yx', 'Yy', 'Zc', 'Zq', 'Z6']
